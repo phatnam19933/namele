@@ -1,0 +1,18 @@
+name: Run PowerShell Script
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  run-script:
+    runs-on: self-hosted
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Run PowerShell script
+      run: |
+        pwsh -File ./create-vps.ps1 -VMName "GitHubVPS" -MemoryStartupBytes 4GB -MaxMemoryBytes 8GB -VHDPath "C:\Hyper-V\GitHubVPS.vhdx" -ISOPath "C:\ISO\WindowsServer2019.iso"
+        
